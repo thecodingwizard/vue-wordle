@@ -118,6 +118,7 @@ function completeRow() {
           -1
         )
       }, 1600)
+      window.history.replaceState(null, "", "?");
     } else if (currentRowIndex < board.length - 1) {
       // go the next row
       currentRowIndex++
