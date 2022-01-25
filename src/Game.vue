@@ -168,6 +168,13 @@ function genResultGrid() {
     })
     .join('\n')
 }
+
+// copy button function
+function copy() {
+	navigator.clipboard.writeText(`${grid}
+
+  ${window.location.origin}/?btoa(answer)`);
+}
 </script>
 
 <template>
@@ -175,6 +182,7 @@ function genResultGrid() {
     <div class="message" v-if="message">
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
+      <button @click="copy">Copy</button>
     </div>
   </Transition>
   <header>
