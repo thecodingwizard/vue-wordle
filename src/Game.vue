@@ -25,6 +25,7 @@ const currentRow = $computed(() => board[currentRowIndex])
 let message = $ref('')
 let grid = $ref('')
 let shakeRowIndex = $ref(-1)
+let gameEnded = $ref(false);
 
 // Keep track of revealed letters for the virtual keyboard
 const letterStates: Record<string, LetterState> = $ref({})
@@ -119,6 +120,7 @@ function completeRow() {
         )
       }, 1600)
       window.history.replaceState(null, "", "?");
+      gameEnded = true;
     } else if (currentRowIndex < board.length - 1) {
       // go the next row
       currentRowIndex++
@@ -129,7 +131,9 @@ function completeRow() {
       // game over :(
       setTimeout(() => {
         showMessage(answer.toUpperCase(), -1)
-      }, 1600)
+      }, 1600);
+      window.history.replaceState(null, "", "?");
+      gameEnded = true;
     }
   } else {
     shake()
@@ -168,6 +172,15 @@ function genResultGrid() {
     })
     .join('\n')
 }
+
+function handleShare() {
+  const url = `${window.location.href.split("?")[0]}?${btoa(answer)}`;
+  navigator.clipboard.writeText(url).then(() => {
+    alert("URL copied to clipboard!");
+  }).catch(err => {
+    alert("Error: " + err);
+  });
+}
 </script>
 
 <template>
@@ -175,9 +188,13 @@ function genResultGrid() {
     <div class="message" v-if="message">
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
+      <div v-if="gameEnded">
+        <button class="share" @click="handleShare">Share</button>
+      </div>
     </div>
   </Transition>
   <header>
+    <button class="share" @click="handleShare">Share</button>
     <h1>VVORDLE</h1>
     <a
       id="source-link"

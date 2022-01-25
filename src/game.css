@@ -14,12 +14,23 @@ header {
   border-bottom: 1px solid #ccc;
   margin-bottom: 30px;
   position: relative;
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
-
-#source-link {
-  position: absolute;
-  right: 1em;
-  top: 0.5em;
+header .share {
+  background-color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+}
+.message .share {
+  background-color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  margin-top: 8px;
 }
 
 .correct,

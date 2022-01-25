@@ -17,7 +17,6 @@ export function getWordOfTheDay() {
   }
 
   let randomIndex = Math.floor(Math.random() * answers.length);
-  window.history.replaceState(null, "", `?${btoa(answers[randomIndex])}`);
   return answers[randomIndex];
 }
 
