@@ -174,8 +174,17 @@ function genResultGrid() {
 }
 
 function handleShare() {
-  const url = `${window.location.href.split("?")[0]}?${btoa(answer)}`;
+  const url = `${window.location.origin}/?${btoa(answer)}`;
   navigator.clipboard.writeText(url).then(() => {
+    alert("URL copied to clipboard!");
+  }).catch(err => {
+    alert("Error: " + err);
+  });
+}
+
+// copy button function for end-of-game
+function handleCopy() {
+	navigator.clipboard.writeText(`${grid}\n\n${window.location.origin}/?${btoa(answer)}`).then(() => {
     alert("URL copied to clipboard!");
   }).catch(err => {
     alert("Error: " + err);
@@ -188,9 +197,7 @@ function handleShare() {
     <div class="message" v-if="message">
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
-      <div v-if="gameEnded">
-        <button class="share" @click="handleShare">Share</button>
-      </div>
+      <button v-if="grid" @click="handleCopy">Copy</button>
     </div>
   </Transition>
   <header>
