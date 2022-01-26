@@ -187,7 +187,7 @@ function handleShare() {
 // copy button function for end-of-game
 function handleCopy() {
 	navigator.clipboard.writeText(`${grid}\n\n${window.location.origin}/?${btoa(answer)}`).then(() => {
-    alert("URL copied to clipboard!");
+    alert("Copied to clipboard!");
   }).catch(err => {
     alert("Error: " + err);
   });
