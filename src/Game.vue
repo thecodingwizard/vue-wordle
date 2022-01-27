@@ -132,6 +132,7 @@ function completeRow() {
     } else {
       // game over :(
       setTimeout(() => {
+        grid = genResultGrid()
         showMessage(answer.toUpperCase(), -1)
       }, 1600);
       window.history.replaceState(null, "", "?");
